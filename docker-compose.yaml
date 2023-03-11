@@ -1,8 +1,21 @@
 services:
+  
+  nginx:
+    image: nginx:latest
+
+    ports:
+      -"8080:80"
+    
+    volumes:
+      -./nginx/default.conf:/nginx/conf.d/default.conf
+
+    depends_on:
+      - php-fpm
+      
   php-fpm:
     build: 
       dockerfile: ./php/Dockerfile
+    
     volumes:
       - ./src:/var/www/html
     
-  nginx:
