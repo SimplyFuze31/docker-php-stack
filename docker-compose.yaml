@@ -1,6 +1,7 @@
 services:
   
   nginx:
+    container_name: nginx
     image: nginx:latest
 
     ports:
@@ -13,9 +14,18 @@ services:
       - php-fpm
       
   php-fpm:
+    container_name: php-fpm
     build: 
       dockerfile: ./php/Dockerfile
     
     volumes:
       - ./src:/var/www/html
     
+  
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD: secret
+      - MYSQL_DATABASE: Sandbox
+    depends_on:
+      - php-fpm
