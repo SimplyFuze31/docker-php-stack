@@ -1,0 +1,8 @@
+services:
+  php-fpm:
+    build: 
+      dockerfile: ./php/Dockerfile
+    volumes:
+      - ./src:/var/www/html
+    
+  nginx:
