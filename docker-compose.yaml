@@ -17,7 +17,8 @@ services:
     container_name: php-fpm
     build: 
       dockerfile: ./php/Dockerfile
-    
+    depends_on:
+      - mysql
     volumes:
       - ./src:/src
     
@@ -25,6 +26,10 @@ services:
   mysql:
     image: mysql:latest
     restart: always
+    volumes:
+      - ./tmp/db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: Sandbox
+    ports:
+      - "8090:3306"
