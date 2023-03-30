@@ -1,7 +1,7 @@
 services:
   
   nginx:
-    container_name: nginx
+    container_name: ki193-nginx
     image: nginx:latest
 
     ports:
@@ -14,7 +14,7 @@ services:
       - php-fpm
       
   php-fpm:
-    container_name: php-fpm
+    container_name: ki193-php-fpm
     build: 
       dockerfile: ./php/Dockerfile
     depends_on:
@@ -24,10 +24,9 @@ services:
     
   
   mysql:
+    container_name: ki193-mysql
     image: mysql:latest
     restart: always
-    volumes:
-      - ./tmp/db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: Sandbox
